@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:clima/services/location.dart';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -15,33 +15,17 @@ class _LoadingScreenState extends State<LoadingScreen> {
     getLocation();
   }
 
-  //Settings of the GEOLOCATOR before initialization
-  final LocationSettings locationSettings = const LocationSettings(
-    accuracy: LocationAccuracy.low,
-    distanceFilter: 100,
-  );
-
   // Function to get the location of the phone
   Future<void> getLocation() async {
-    LocationPermission permission = await Geolocator.requestPermission();
-
-    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
-      if (kDebugMode) {
-        print('Location permission denied');
-      }
-      return;
-    }
-
-    Position position = await Geolocator.getCurrentPosition(locationSettings: locationSettings);
-
+    Location location = Location();
+    await location.getCurrentLocation();
     if (kDebugMode) {
-      print(position);
+      print(location.latitude);
     }
-
+    if (kDebugMode) {
+      print(location.longitude);
+    }
   }
-
-
-
 
 
   @override
