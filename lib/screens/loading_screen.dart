@@ -8,6 +8,13 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+
+  @override
+  void initState () {
+    super.initState();
+    getLocation();
+  }
+
   //Settings of the GEOLOCATOR before initialization
   final LocationSettings locationSettings = const LocationSettings(
     accuracy: LocationAccuracy.low,
@@ -30,32 +37,17 @@ class _LoadingScreenState extends State<LoadingScreen> {
     if (kDebugMode) {
       print(position);
     }
+
   }
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
 
-          onPressed: () {
-            getLocation();
-          },
-          style: ButtonStyle(
-            backgroundColor: WidgetStateProperty.all(Colors.lightBlueAccent.shade700),
-            minimumSize: WidgetStatePropertyAll(Size(150.0, 80.0)),
-          ),
-
-
-          child: const Text(
-              'Get Location',
-            style: TextStyle(
-              fontSize: 30.0
-            ),
-
-          ),
-        ),
-      ),
     );
   }
 }
