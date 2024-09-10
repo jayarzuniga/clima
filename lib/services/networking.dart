@@ -17,7 +17,7 @@ class NetworkHelper {
     if (res.statusCode == 200) {
       String data = res.body;
 
-      return jsonEncode(data);
+      return jsonDecode(data);
 
     } else {
       if (kDebugMode) {
